@@ -2,8 +2,11 @@ package com.example.listview
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,6 +18,12 @@ class MainActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this,R.layout.list_item,array)
         val listView:ListView = findViewById(R.id.listview)
         listView.adapter=adapter
+        listView.onItemClickListener = object: AdapterView.OnItemClickListener{
+            override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+               val itemValue = listView.getItemAtPosition(position)
+                Toast.makeText(applicationContext,"Position $position \n Value: $itemValue",Toast.LENGTH_SHORT).show();
+            }
+        }
 
     }
 }
